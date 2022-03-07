@@ -39,6 +39,13 @@ const bord = (state = initialState, action) => {
       );
       return [...state];
     }
+    case "COPY_LIST": {
+      const findBord = state.find(
+        (bords) => bords.id === Number(action.payload.selectedCopyBord)
+      );
+      findBord.list = [...findBord.list, action.payload.ListId];
+      return [...state];
+    }
 
     default:
       return state;

@@ -39,3 +39,9 @@ export function move_bord(payload) {
     payload,
   };
 }
+export function copy_bord(payload) {
+  return {
+    type: "COPY_LIST",
+    payload,
+  };
+}

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  copy_bord,
   delete_bord_list_id_action,
   move_bord,
 } from "../Redux/Actions/BordActions";
@@ -12,8 +13,10 @@ function ListItem({ id, title, task, bordId }) {
   const [isOption, setIsOption] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [isMove, setIsMove] = useState(false);
+  const [isCopy, setIsCopy] = useState(false);
   const [eidtValue, setEditValue] = useState("");
   const [selectedBordId, setSelectedBordId] = useState("");
+  const [selectedCopyBordId, setSelectedCopyBordId] = useState("");
 
   const allTask = useSelector((state) => state.task);
   const allBord = useSelector((state) => state.bord);
@@ -30,6 +33,11 @@ function ListItem({ id, title, task, bordId }) {
         prevListId: id,
       })
     );
+  };
+
+  const copyHendeler = () => {
+    setIsCopy(false);
+    dispatch(copy_bord({ selectedCopyBord: selectedCopyBordId, ListId: id }));
   };
 
   const threeDot =
@@ -85,6 +93,7 @@ function ListItem({ id, title, task, bordId }) {
                 <li
                   onClick={() => {
                     setIsOption(false);
+                    setIsCopy(true);
                   }}
                   className="hover:bg-teal-500 rounded  p-1 pl-2 pr-2 hover:text-white cursor-pointer text-lg font-semibold"
                 >
@@ -161,14 +170,51 @@ function ListItem({ id, title, task, bordId }) {
               </div>
             </div>
           )}
+          {isCopy && (
+            <div className="absolute bg-slate-100 w-[16rem] rounded top-[-.5rem] left-[-.5rem] z-30 p-2">
+              <h1 className=" text-lg font-semibold text-center">
+                Copy This List Another Bord
+              </h1>
+              <select
+                className=" w-full outline-none border p-1 mt-1"
+                value={selectedCopyBordId}
+                onChange={(e) => {
+                  setSelectedCopyBordId(e.target.value);
+                }}
+              >
+                <option value="">select</option>
+                {allBord.map((bord) => (
+                  <option value={bord.id} className="" key={bord.id}>
+                    {bord.title}
+                  </option>
+                ))}
+              </select>
+              <div className="mt-1 flex justify-between">
+                <button
+                  onClick={copyHendeler}
+                  className="p-1 pl-2 pr-2 bg-white rounded shadow"
+                >
+                  Save
+                </button>
+                <button
+                  onClick={() => {
+                    setIsCopy(false);
+                  }}
+                  className="text-red-600 cursor-pointer text-lg"
+                >
+                  X
+                </button>
+              </div>
+            </div>
+          )}
+          {allTask
+            .filter((fullTask) => {
+              return task.filter((item) => item === fullTask.id) > 0;
+            })
+            .map((items) => {
+              return <TaskItem key={items.id} task={items} listId={id} />;
+            })}
         </div>
-        {allTask
-          .filter((fullTask) => {
-            return task.filter((item) => item === fullTask.id) > 0;
-          })
-          .map((items) => {
-            return <TaskItem key={items.id} task={items} listId={id} />;
-          })}
       </div>
       <AddTask listId={id} />
     </div>
