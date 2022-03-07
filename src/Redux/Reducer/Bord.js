@@ -5,6 +5,11 @@ const bord = (state = initialState, action) => {
     case "ADD_BORD": {
       return [action.payload, ...state];
     }
+    case "EDIT_BORD_NAME": {
+      const findBord = state.find((bord) => bord.id === action.payload.bordId);
+      findBord.title = action.payload.title;
+      return [...state];
+    }
     case "DELETE_BORD": {
       return [...state.filter((bord) => bord.id !== action.payload)];
     }
