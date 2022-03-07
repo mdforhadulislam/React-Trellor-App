@@ -10,3 +10,9 @@ export function add_list_task_id_action(payload) {
     payload,
   };
 }
+export default function delete_list_task_id_action(payload) {
+  return {
+    type: "DELETE_LiST_TASK_ID",
+    payload,
+  };
+}

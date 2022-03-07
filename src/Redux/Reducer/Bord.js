@@ -9,17 +9,10 @@ const bord = (state = initialState, action) => {
       return [...state.filter((bord) => bord.id !== action.payload)];
     }
     case "ADD_BORD_LIST_ID": {
-      return [
-        ...state
-          .filter((bords) => bords.id === action.payload.bordId)
-          .map((bord) => ({
-            ...bord,
-            list: [...bord.list, action.payload.listId],
-          })),
-        ...state
-          .filter((bords) => bords.id !== action.payload.bordId)
-          .map((bord) => ({ ...bord })),
-      ];
+      const findBord = state.find((bord) => bord.id === action.payload.bordId);
+      findBord.list = [...findBord.list, action.payload.listId];
+
+      return [...state];
     }
 
     default:

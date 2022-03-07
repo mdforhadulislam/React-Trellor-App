@@ -6,14 +6,14 @@ const list = (state = initialState, { type, payload }) => {
       return [...state, payload];
     }
     case "ADD_LiST_TASK_ID": {
-      return [
-        ...state
-          .filter((list) => list.id === payload.listId)
-          .map((item) => ({ ...item, task: [...item.task, payload.taskId] })),
-        ...state
-          .filter((list) => list.id !== payload.listId)
-          .map((item) => ({ ...item })),
-      ];
+      const findItem = state.find((list) => list.id === payload.listId);
+      findItem.task = [...findItem.task, payload.taskId];
+      return [...state];
+    }
+    case "DELETE_LiST_TASK_ID": {
+      const findItem = state.find((list) => list.id === payload.listId);
+      findItem.task = findItem.task.filter((task) => task !== payload.taskId);
+      return [...state];
     }
 
     default:

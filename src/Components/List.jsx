@@ -37,11 +37,6 @@ function List() {
                   alignItems: "flex-start",
                 }}
               >
-                {console.log(
-                  bord?.list.filter((id) =>
-                    allList.filter((item) => item.id === id)
-                  )
-                )}
                 {bord?.list?.length <= 0
                   ? ""
                   : allList
