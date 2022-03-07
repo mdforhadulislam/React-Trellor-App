@@ -7,8 +7,6 @@ function AddBord() {
   const [bordColor, setBordColor] = useState("");
   const dispatch = useDispatch();
 
-  // const allstate = useSelector((state) => state);
-
   const add_bord = (e) => {
     e.preventDefault();
     if (bordName !== "") {

@@ -50,6 +50,7 @@ function List() {
                             id={singlelist.id}
                             title={singlelist.listTitle}
                             task={singlelist.task}
+                            bordId={bord.id}
                           />
                         );
                       })}

@@ -25,3 +25,17 @@ export function add_bord_list_id_action(payload) {
     payload,
   };
 }
+
+export function delete_bord_list_id_action(payload) {
+  return {
+    type: "DELETE_BORD_LIST_ID",
+    payload,
+  };
+}
+
+export function move_bord(payload) {
+  return {
+    type: "MOVE_LIST",
+    payload,
+  };
+}

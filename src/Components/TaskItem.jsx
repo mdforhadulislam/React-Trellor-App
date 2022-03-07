@@ -13,8 +13,10 @@ function TaskItem({ task, listId }) {
 
   return (
     <div className="flex p-1 pr-2 pl-2 m-2 mr-0 bg-white rounded justify-between">
-      <p>{task.taskTitle}</p>
-      <div className="w-5 cursor-pointer">
+      <div className="w-[11rem] h-auto ">
+        <p className="">{task.taskTitle}</p>
+      </div>
+      <div className="w-[1.3rem] cursor-pointer">
         <img onClick={deleteTask} src={DeleteIcon} alt="DeleteIcon" />
       </div>
     </div>
