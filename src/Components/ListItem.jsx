@@ -24,7 +24,9 @@ function ListItem({ id, title, task, bordId }) {
     <div className="w-[17rem] h-auto p-2 bg-white rounded shadow-md inline-block m-3">
       <div className=" bg-slate-200 pl-2 pr-4  pt-2 pb-2 rounded">
         <div className="flex  justify-between align-middle relative ">
-          <h1 className="text-slate-900 text-lg font-medium">{title}</h1>
+          <h1 className="text-slate-900 text-lg font-medium w-[14rem]">
+            {title}
+          </h1>
           <img
             onClick={() => {
               setIsOption(!isOption);

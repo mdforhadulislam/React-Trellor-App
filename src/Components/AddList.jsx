@@ -65,7 +65,9 @@ export default function AddList({ bord }) {
           className="flex bg-slate-200 justify-between align-middle text-white pl-2 pr-4  pt-2 pb-2 rounded cursor-pointer"
           onClick={() => setAddlist(true)}
         >
-          <h3 className="text-slate-900 text-lg font-medium">Add List</h3>
+          <h3 className="text-slate-900 text-lg font-medium w-[14rem]">
+            Add List
+          </h3>
           <img src={plusIcon} alt={"plusIcon"} />
         </div>
       )}
