@@ -39,6 +39,7 @@ export default function AddList({ bord }) {
               className="w-full border-none outline-none p-1 mb-2 rounded"
               onChange={(e) => setListTitle(e.target.value)}
             />
+
             <div className="flex justify-between">
               <button
                 type="submit"

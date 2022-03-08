@@ -33,12 +33,13 @@ function AddTask({ listId }) {
       {addTask ? (
         <div className="flex bg-slate-200 justify-between  pl-2 pr-2 pt-2 pb-2 rounded mt-2 ">
           <form className="w-full">
-            <input
+            <textarea
               type="text"
               className="w-full border-none outline-none p-1 mb-2 rounded"
               onChange={(e) => setTaskTitle(e.target.value)}
               value={taskTitle}
-            />
+            ></textarea>
+
             <div className="flex justify-between">
               <button
                 type="submit"

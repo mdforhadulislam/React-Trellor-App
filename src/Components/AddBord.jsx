@@ -45,7 +45,9 @@ function AddBord() {
   return (
     <div className="add__bord__container p-5">
       <div className="add__bord__container__title pb-3 w-full">
-        <h1 className=" text-4xl text-center title">All Bord</h1>
+        <h1 className=" text-4xl text-center title break-words">
+          React Trellor App
+        </h1>
       </div>
       <div className=" rounded shadow-lg w-[25rem] bg-white m-auto ">
         <div className="add__bord__container__form p-3 pb-4 text-center">
