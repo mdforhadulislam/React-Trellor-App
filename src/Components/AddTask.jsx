@@ -38,6 +38,7 @@ function AddTask({ listId }) {
               className="w-full border-none outline-none p-1 mb-2 rounded"
               onChange={(e) => setTaskTitle(e.target.value)}
               value={taskTitle}
+              autoFocus
             ></textarea>
 
             <div className="flex justify-between">

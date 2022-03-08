@@ -57,6 +57,7 @@ function AddBord() {
               className=" w-full border outline-none p-1 text-[18px] rounded"
               onChange={(e) => setBordName(e.target.value)}
               value={bordName}
+              autoFocus
             />
             <div className="submit__button__and__color__set flex justify-between pt-3">
               <div className="left flex w-[17rem]">

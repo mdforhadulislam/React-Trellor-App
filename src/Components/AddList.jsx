@@ -38,6 +38,7 @@ export default function AddList({ bord }) {
               type="text"
               className="w-full border-none outline-none p-1 mb-2 rounded"
               onChange={(e) => setListTitle(e.target.value)}
+              autoFocus
             />
 
             <div className="flex justify-between">
