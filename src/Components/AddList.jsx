@@ -32,7 +32,7 @@ export default function AddList({ bord }) {
   return (
     <>
       {addList ? (
-        <div className="flex bg-slate-200 justify-between  pl-2 pr-2 pt-2 pb-2 rounded ">
+        <div className="flex bg-slate-200 justify-between  pl-2 pr-2 pt-2 pb-2 rounded w-[16rem]">
           <form className="w-full">
             <input
               type="text"
