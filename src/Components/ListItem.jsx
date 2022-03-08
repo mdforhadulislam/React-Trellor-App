@@ -1,16 +1,10 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  copy_bord,
-  delete_bord_list_id_action,
-  move_bord,
-} from "../Redux/Actions/BordActions";
-import {
-  copy_list_action,
-  delete_list,
-  edit_title_action,
-} from "../Redux/Actions/ListAction";
+import { useSelector } from "react-redux";
 import AddTask from "./AddTask";
+import CopyListItem from "./CopyListItem";
+import EditListItem from "./EditListItem";
+import MoveListItem from "./MoveListItem";
+import OptionListItem from "./OptionListItem";
 import TaskItem from "./TaskItem";
 
 function ListItem({ id, title, task, bordId }) {
@@ -19,40 +13,9 @@ function ListItem({ id, title, task, bordId }) {
   const [isMove, setIsMove] = useState(false);
   const [isCopy, setIsCopy] = useState(false);
   const [eidtValue, setEditValue] = useState("");
-  const [selectedBordId, setSelectedBordId] = useState("");
-  const [selectedCopyBordId, setSelectedCopyBordId] = useState("");
 
   const allTask = useSelector((state) => state.task);
   const allBord = useSelector((state) => state.bord);
-
-  const dispatch = useDispatch();
-
-  const moveHendeler = () => {
-    setIsMove(false);
-    dispatch(
-      move_bord({
-        selectedBord: selectedBordId,
-        newList: id,
-        prevBrodId: bordId,
-        prevListId: id,
-      })
-    );
-  };
-
-  const copyHendeler = () => {
-    setIsCopy(false);
-    const obj = { newListId: Math.round(Date.now() * Math.random()) };
-
-    dispatch(
-      copy_list_action({
-        listId: id,
-        newListId: obj.newListId,
-      })
-    );
-    dispatch(
-      copy_bord({ selectedCopyBord: selectedCopyBordId, ListId: obj.newListId })
-    );
-  };
 
   const threeDot =
     "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAG9JREFUSEtjZKAxYKSx+QwjywIHBgaG+dAgTWRgYDhATPCSEkQPGBgY5KGGgtiK1LbgAwMDAz/U0IcMDAwK1LYAFEQLoIYm0CKIiHEwhhpS4oDmFoymIoJBPJqKiAqi0bIIbzCNpiKCqYgsBTQvTQFNkxgZM6/25AAAAABJRU5ErkJggg==";
@@ -71,155 +34,35 @@ function ListItem({ id, title, task, bordId }) {
             alt={"threeDot"}
           />
           {isOption && (
-            <div className="absolute bg-slate-100 w-[16rem] rounded top-[-.5rem] left-[-.5rem]">
-              <ul className=" rounded">
-                <li
-                  onClick={() => {
-                    setIsOption(false);
-                    setIsEdit(true);
-                    setEditValue(title);
-                  }}
-                  className="hover:bg-teal-500 rounded p-1 pl-2 pr-2 hover:text-white cursor-pointer text-lg font-semibold"
-                >
-                  Edit Title
-                </li>
-                <li
-                  onClick={() => {
-                    setIsOption(false);
-                    dispatch(delete_list({ id }));
-                    dispatch(
-                      delete_bord_list_id_action({ bordId, listId: id })
-                    );
-                  }}
-                  className="hover:bg-teal-500 rounded p-1 pl-2 pr-2 hover:text-white cursor-pointer text-lg font-semibold"
-                >
-                  Delete List
-                </li>
-                <li
-                  onClick={() => {
-                    setIsOption(false);
-                    setIsMove(true);
-                  }}
-                  className="hover:bg-teal-500 rounded  p-1 pl-2 pr-2 hover:text-white cursor-pointer text-lg font-semibold"
-                >
-                  Move List
-                </li>
-                <li
-                  onClick={() => {
-                    setIsOption(false);
-                    setIsCopy(true);
-                  }}
-                  className="hover:bg-teal-500 rounded  p-1 pl-2 pr-2 hover:text-white cursor-pointer text-lg font-semibold"
-                >
-                  Copy List
-                </li>
-              </ul>
-            </div>
+            <OptionListItem
+              setIsOption={setIsOption}
+              setIsEdit={setIsEdit}
+              setEditValue={setEditValue}
+              setIsMove={setIsMove}
+              setIsCopy={setIsCopy}
+              listTitle={title}
+              id={id}
+              bordId={bordId}
+            />
           )}
           {isEdit && (
-            <div className="absolute bg-slate-100 w-[16rem] rounded top-[-.5rem] left-[-.5rem] z-20 p-2">
-              <input
-                type="text"
-                className="w-full outline-none border rounded p-1"
-                value={eidtValue}
-                onChange={(e) => {
-                  setEditValue(e.target.value);
-                }}
-              />
-              <div className="w-full flex justify-between mt-1">
-                <button
-                  className="p-1 pl-2 pr-2 bg-slate-200 rounded shadow"
-                  onClick={() => {
-                    setIsEdit(false);
-                    dispatch(edit_title_action({ id, title: eidtValue }));
-                  }}
-                >
-                  Save
-                </button>
-                <button
-                  className="text-red-600 cursor-pointer"
-                  onClick={() => {
-                    setIsEdit(false);
-                  }}
-                >
-                  X
-                </button>
-              </div>
-            </div>
+            <EditListItem
+              eidtValue={eidtValue}
+              setEditValue={setEditValue}
+              setIsEdit={setIsEdit}
+              id={id}
+            />
           )}
           {isMove && (
-            <div className="absolute bg-slate-100 w-[16rem] rounded top-[-.5rem] left-[-.5rem] z-30 p-2">
-              <h1 className=" text-lg font-semibold text-center">
-                Move This List Another Bord
-              </h1>
-              <select
-                className=" w-full outline-none border p-1 mt-1"
-                value={selectedBordId}
-                onChange={(e) => {
-                  setSelectedBordId(e.target.value);
-                }}
-              >
-                <option value="">select</option>
-                {allBord.map((bord) => (
-                  <option value={bord.id} className="" key={bord.id}>
-                    {bord.title}
-                  </option>
-                ))}
-              </select>
-              <div className="mt-1 flex justify-between">
-                <button
-                  onClick={moveHendeler}
-                  className="p-1 pl-2 pr-2 bg-white rounded shadow"
-                >
-                  Save
-                </button>
-                <button
-                  onClick={() => {
-                    setIsMove(false);
-                  }}
-                  className="text-red-600 cursor-pointer text-lg"
-                >
-                  X
-                </button>
-              </div>
-            </div>
+            <MoveListItem
+              id={id}
+              bordId={bordId}
+              setIsMove={setIsMove}
+              allBord={allBord}
+            />
           )}
           {isCopy && (
-            <div className="absolute bg-slate-100 w-[16rem] rounded top-[-.5rem] left-[-.5rem] z-30 p-2">
-              <h1 className=" text-lg font-semibold text-center">
-                Copy This List Another Bord
-              </h1>
-              <select
-                className=" w-full outline-none border p-1 mt-1"
-                value={selectedCopyBordId}
-                onChange={(e) => {
-                  setSelectedCopyBordId(e.target.value);
-                }}
-              >
-                <option value="">select</option>
-                {allBord.map((bord) => (
-                  <option value={bord.id} className="" key={bord.id}>
-                    {bord.title}
-                  </option>
-                ))}
-              </select>
-              <div className="mt-1 flex justify-between">
-                <button
-                  onClick={copyHendeler}
-                  className="p-1 pl-2 pr-2 bg-white rounded shadow"
-                >
-                  Save
-                </button>
-                <button
-                  onClick={() => {
-                    setIsCopy(false);
-                  }}
-                  className="text-red-600 cursor-pointer text-lg"
-                >
-                  X
-                </button>
-              </div>
-            </div>
+            <CopyListItem setIsCopy={setIsCopy} id={id} allBord={allBord} />
           )}
         </div>
 

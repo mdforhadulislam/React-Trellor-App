@@ -1,4 +1,6 @@
-const initialState = [];
+import GetLocalSorageData from "../../Hooks/GetLocalStoreData";
+
+const initialState = [...GetLocalSorageData()?.bord];
 
 const bord = (state = initialState, action) => {
   switch (action.type) {

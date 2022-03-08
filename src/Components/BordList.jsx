@@ -7,7 +7,7 @@ function BordList() {
   return (
     <div>
       <div className="w-11/12 m-auto text-center pb-4">
-        {allBord.map((bord) => {
+        {allBord?.map((bord) => {
           return (
             <SingleBordBox
               key={bord.id}

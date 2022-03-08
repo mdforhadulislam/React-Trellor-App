@@ -1,6 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router";
+import { Link } from "react-router-dom";
+import BackIcon from "../icon/backIcon.svg";
 import AddList from "./AddList";
 import ListItem from "./ListItem";
 
@@ -12,8 +14,8 @@ function List() {
   return (
     <>
       {allBords
-        .filter((bord) => bord.id === Number(bordId))
-        .map((bord) => {
+        ?.filter((bord) => bord.id === Number(bordId))
+        ?.map((bord) => {
           return (
             <div
               key={bord.id}
@@ -24,9 +26,30 @@ function List() {
                   : { width: "100%" }
               }
             >
-              <h1 className="text-center p-2 text-2xl font-semibold bg-gray-100 uppercase ">
-                bord name {bord.title}
-              </h1>
+              <div
+                className=" bg-gray-100 pl-6"
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "flex-start",
+                  alignItems: "center",
+                }}
+              >
+                <div className="w-[2rem]">
+                  <Link to={"/"}>
+                    <img
+                      className="w-[2rem] cursor-pointer"
+                      src={BackIcon}
+                      alt="BackIcon"
+                    />
+                  </Link>
+                </div>
+                <div className="w-full">
+                  <h1 className="text-center p-2 text-2xl font-semibold uppercase ">
+                    bord name {bord.title}
+                  </h1>
+                </div>
+              </div>
 
               <div
                 className={[bord.bgColor, "w-full h-screen p-5"].join(" ")}
@@ -41,9 +64,9 @@ function List() {
                   ? ""
                   : allList
                       ?.filter((list) =>
-                        bord?.list.find((item) => list.id === item)
+                        bord?.list?.find((item) => list.id === item)
                       )
-                      .map((singlelist) => {
+                      ?.map((singlelist) => {
                         return (
                           <ListItem
                             key={singlelist.id}

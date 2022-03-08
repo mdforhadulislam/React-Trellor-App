@@ -1,4 +1,6 @@
-const initialState = [];
+import GetLocalSorageData from "../../Hooks/GetLocalStoreData";
+
+const initialState = [...GetLocalSorageData()?.list];
 
 const list = (state = initialState, { type, payload }) => {
   switch (type) {
