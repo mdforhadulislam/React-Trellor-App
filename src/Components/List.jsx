@@ -9,6 +9,8 @@ function List() {
   const allBords = useSelector((state) => state.bord);
   const allList = useSelector((state) => state.list);
 
+  console.log(allList, allBords);
+
   return (
     <>
       {allBords

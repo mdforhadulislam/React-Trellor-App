@@ -28,3 +28,10 @@ export default function delete_list_task_id_action(payload) {
     payload,
   };
 }
+
+export function copy_list_action(payload) {
+  return {
+    type: "COPY_LIST",
+    payload,
+  };
+}

@@ -5,7 +5,11 @@ import {
   delete_bord_list_id_action,
   move_bord,
 } from "../Redux/Actions/BordActions";
-import { delete_list, edit_title_action } from "../Redux/Actions/ListAction";
+import {
+  copy_list_action,
+  delete_list,
+  edit_title_action,
+} from "../Redux/Actions/ListAction";
 import AddTask from "./AddTask";
 import TaskItem from "./TaskItem";
 
@@ -37,7 +41,17 @@ function ListItem({ id, title, task, bordId }) {
 
   const copyHendeler = () => {
     setIsCopy(false);
-    dispatch(copy_bord({ selectedCopyBord: selectedCopyBordId, ListId: id }));
+    const obj = { newListId: Math.round(Date.now() * Math.random()) };
+
+    dispatch(
+      copy_list_action({
+        listId: id,
+        newListId: obj.newListId,
+      })
+    );
+    dispatch(
+      copy_bord({ selectedCopyBord: selectedCopyBordId, ListId: obj.newListId })
+    );
   };
 
   const threeDot =
@@ -207,14 +221,15 @@ function ListItem({ id, title, task, bordId }) {
               </div>
             </div>
           )}
-          {allTask
-            .filter((fullTask) => {
-              return task.filter((item) => item === fullTask.id) > 0;
-            })
-            .map((items) => {
-              return <TaskItem key={items.id} task={items} listId={id} />;
-            })}
         </div>
+
+        {allTask
+          .filter((fullTask) => {
+            return task.filter((item) => item === fullTask.id) > 0;
+          })
+          .map((items) => {
+            return <TaskItem key={items.id} task={items} listId={id} />;
+          })}
       </div>
       <AddTask listId={id} />
     </div>

@@ -39,7 +39,7 @@ const bord = (state = initialState, action) => {
       );
       return [...state];
     }
-    case "COPY_LIST": {
+    case "COPY_BORD_LIST": {
       const findBord = state.find(
         (bords) => bords.id === Number(action.payload.selectedCopyBord)
       );

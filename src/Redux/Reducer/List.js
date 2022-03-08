@@ -23,6 +23,15 @@ const list = (state = initialState, { type, payload }) => {
       findItem.task = findItem.task.filter((task) => task !== payload.taskId);
       return [...state];
     }
+    case "COPY_LIST": {
+      const findItem = state.find((list) => list.id === payload.listId);
+      const newList = {
+        id: payload.newListId,
+        listTitle: findItem.listTitle,
+        task: findItem.task,
+      };
+      return [...state, newList];
+    }
 
     default:
       return state;
