@@ -48,6 +48,15 @@ const bord = (state = initialState, action) => {
       findBord.list = [...findBord.list, action.payload.ListId];
       return [...state];
     }
+    case "SORT_LIST_ID_IN_BOARD": {
+      const { targetIndex, sourceIndex, droppableId } = action.payload;
+
+      const targetBord = state.find((bord) => bord.id === Number(droppableId));
+      const tasks = targetBord.list.splice(sourceIndex, 1);
+      targetBord.list.splice(targetIndex, 0, ...tasks);
+
+      return [...state];
+    }
 
     default:
       return state;

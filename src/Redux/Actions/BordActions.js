@@ -45,3 +45,10 @@ export function copy_bord(payload) {
     payload,
   };
 }
+
+export function sort_list_id_in_board(payload) {
+  return {
+    type: "SORT_LIST_ID_IN_BOARD",
+    payload,
+  };
+}
