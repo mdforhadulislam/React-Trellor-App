@@ -77,6 +77,7 @@ function List() {
                           />
                         );
                       })}
+
                 <div className="w-[17rem] h-auto p-2 bg-white rounded shadow-md inline-block m-3">
                   <AddList bord={bord} />
                 </div>
