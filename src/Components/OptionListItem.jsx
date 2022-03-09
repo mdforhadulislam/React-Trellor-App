@@ -16,7 +16,7 @@ function OptionListItem({
   const dispatch = useDispatch();
 
   return (
-    <div className="absolute bg-slate-100 w-[16rem] rounded top-[-.5rem] left-[-.5rem]">
+    <div className="absolute bg-slate-100 w-[16rem] rounded top-[-.5rem] left-[-.5rem] z-10">
       <ul className=" rounded">
         <li
           onClick={() => {

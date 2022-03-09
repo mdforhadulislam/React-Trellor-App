@@ -35,7 +35,7 @@ function AddTask({ listId }) {
           <form className="w-full">
             <textarea
               type="text"
-              className="w-full border-none outline-none p-1 mb-2 rounded"
+              className="w-full border-none outline-none p-1 mb-2 rounded resize-none"
               onChange={(e) => setTaskTitle(e.target.value)}
               value={taskTitle}
               autoFocus

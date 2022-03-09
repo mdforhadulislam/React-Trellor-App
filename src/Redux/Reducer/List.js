@@ -25,6 +25,24 @@ const list = (state = initialState, { type, payload }) => {
       findItem.task = findItem.task.filter((task) => task !== payload.taskId);
       return [...state];
     }
+    case "MOVE_LIST_TASK": {
+      const findItem = state.find((list) => list.id === Number(payload.listId));
+      findItem.task = [...findItem.task, payload.taskId];
+      const presentListItem = state.find(
+        (list) => list.id === payload.presentListId
+      );
+      presentListItem.task = presentListItem.task.filter(
+        (task) => task !== payload.taskId
+      );
+
+      return [...state];
+    }
+    case "COPY_LIST_TASK": {
+      const findItem = state.find((list) => list.id === Number(payload.listId));
+      findItem.task = [...findItem.task, payload.taskId];
+      return [...state];
+    }
+
     case "COPY_LIST": {
       const findItem = state.find((list) => list.id === payload.listId);
       const newList = {

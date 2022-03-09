@@ -31,7 +31,7 @@ function ListItem({ id, title, task, bordId }) {
             onClick={() => {
               setIsOption(!isOption);
             }}
-            className=" cursor-pointer z-10"
+            className=" cursor-pointer z-20"
             src={threeDot}
             alt={"threeDot"}
           />

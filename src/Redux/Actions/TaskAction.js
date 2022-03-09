@@ -10,3 +10,16 @@ export function delete_task_action(payload) {
     payload,
   };
 }
+
+export function edit_task_action(payload) {
+  return {
+    type: "EDIT_TASK",
+    payload,
+  };
+}
+export function copy_task_action(payload) {
+  return {
+    type: "COPY_TASK",
+    payload,
+  };
+}

@@ -1,25 +1,70 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import DeleteIcon from "../icon/deleteIcon.svg";
-import delete_list_task_id_action from "../Redux/Actions/ListAction";
-import { delete_task_action } from "../Redux/Actions/TaskAction";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import CopyTaskItem from "./CopyTaskItem";
+import EditTaskItem from "./EditTaskItem";
+import MoveTaskItem from "./MoveTaskItem";
+import OptionTaskItem from "./OptionTaskItem";
 
 function TaskItem({ task, listId }) {
-  const dispatch = useDispatch();
+  const [isOption, setIsOption] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
+  const [isMove, setIsMove] = useState(false);
+  const [isCopy, setIsCopy] = useState(false);
 
-  const deleteTask = (e) => {
-    e.preventDefault();
-    dispatch(delete_list_task_id_action({ listId, taskId: task.id }));
-    dispatch(delete_task_action({ id: task.id }));
-  };
+  const allList = useSelector((state) => state.list);
+  const allBoard = useSelector((state) => state.bord);
+
+  const threeDot =
+    "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAG9JREFUSEtjZKAxYKSx+QwjywIHBgaG+dAgTWRgYDhATPCSEkQPGBgY5KGGgtiK1LbgAwMDAz/U0IcMDAwK1LYAFEQLoIYm0CKIiHEwhhpS4oDmFoymIoJBPJqKiAqi0bIIbzCNpiKCqYgsBTQvTQFNkxgZM6/25AAAAABJRU5ErkJggg==";
 
   return (
     <div className="flex p-1 pr-2 pl-2 m-2 mr-0 bg-white rounded justify-between">
       <div className="w-[11rem] h-auto ">
         <p className="break-words">{task.taskTitle}</p>
       </div>
-      <div className="w-[1.3rem] cursor-pointer">
-        <img onClick={deleteTask} src={DeleteIcon} alt="DeleteIcon" />
+      <div className="w-[1.3rem] cursor-pointer relative">
+        <img
+          className="z-0"
+          src={threeDot}
+          alt="ThreeDotIcon"
+          onClick={() => {
+            setIsOption(!isOption);
+          }}
+        />
+
+        {isOption && (
+          <OptionTaskItem
+            setIsCopy={setIsCopy}
+            setIsEdit={setIsEdit}
+            setIsMove={setIsMove}
+            setIsOption={setIsOption}
+            listId={listId}
+            task={task}
+          />
+        )}
+
+        {isEdit && <EditTaskItem task={task} setIsEdit={setIsEdit} />}
+
+        {isMove && (
+          <MoveTaskItem
+            allBoard={allBoard}
+            allList={allList}
+            task={task}
+            listId={listId}
+            setIsMove={setIsMove}
+          />
+        )}
+
+        {isCopy && (
+          <CopyTaskItem
+            allBoard={allBoard}
+            allList={allList}
+            setIsCopy={setIsCopy}
+            task={task}
+          />
+        )}
+
+        {/*  */}
       </div>
     </div>
   );
