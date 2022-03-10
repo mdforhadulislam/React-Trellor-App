@@ -20,7 +20,7 @@ function MoveListItem({ setIsMove, id, bordId, allBord }) {
   };
 
   return (
-    <div className="absolute bg-slate-100 w-[16rem] rounded top-[-.5rem] left-[-.5rem] z-30 p-2">
+    <div className=" bg-slate-100 w-[18.65rem] rounded z-30 p-2">
       <h1 className=" text-lg font-semibold text-center">
         Move This List Another Bord
       </h1>

@@ -13,7 +13,7 @@ function EditTaskItem({ task, setIsEdit }) {
   };
 
   return (
-    <div className=" absolute w-[14rem] h-auto bg-gray-100 shadow-lg rounded top-[-.5rem] left-[-12.2rem] p-1 z-10">
+    <div className="w-[18.7rem] h-auto bg-gray-100  shadow mt-2 rounded p-1 z-10">
       <textarea
         type="text"
         className="w-full p-1 outline-none border rounded resize-none"

@@ -9,9 +9,10 @@ export default function CopyTaskItem({ allBoard, allList, setIsCopy, task }) {
 
   const dispatch = useDispatch();
   return (
-    <div className=" absolute w-[14rem] h-auto bg-gray-100 shadow-lg rounded top-[1.8rem] left-[-12.2rem] p-3 z-10">
-      <h1 className=" text-base font-medium text-center">
-        Copy To Another Bord List
+    <div className=" w-[18.7rem] h-auto bg-gray-100 mt-2 shadow rounded p-3 z-10">
+      <h1 className=" text-lg  text-center">
+        <span className="font-medium">{task.taskTitle}</span> Copy To Another
+        Bord List
       </h1>
 
       <div className="w-full mt-1">

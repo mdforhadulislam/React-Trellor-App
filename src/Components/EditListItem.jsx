@@ -6,15 +6,15 @@ function EditListItem({ eidtValue, setEditValue, setIsEdit, id }) {
   const dispatch = useDispatch();
 
   return (
-    <div className="absolute bg-slate-100 w-[16rem] rounded top-[-.5rem] left-[-.5rem] z-20 p-2">
-      <input
+    <div className=" bg-slate-100 w-[18.65rem] rounded z-20 p-2">
+      <textarea
         type="text"
         className="w-full outline-none border rounded p-1"
         value={eidtValue}
         onChange={(e) => {
           setEditValue(e.target.value);
         }}
-      />
+      ></textarea>
       <div className="w-full flex justify-between mt-1">
         <button
           className="p-1 pl-2 pr-2 bg-slate-200 rounded shadow"

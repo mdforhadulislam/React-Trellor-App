@@ -1,7 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import delete_list_task_id_action from "../Redux/Actions/ListAction";
-import { delete_task_action } from "../Redux/Actions/TaskAction";
 
 function OptionTaskItem({
   setIsOption,
@@ -30,7 +29,6 @@ function OptionTaskItem({
           onClick={() => {
             setIsOption(false);
             dispatch(delete_list_task_id_action({ listId, taskId: task.id }));
-            dispatch(delete_task_action({ id: task.id }));
           }}
         >
           Delete Task

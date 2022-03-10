@@ -20,9 +20,10 @@ function MoveTaskItem({ allBoard, allList, task, listId, setIsMove }) {
   };
 
   return (
-    <div className=" absolute w-[14rem] h-auto bg-gray-100 shadow-lg rounded top-[1.8rem] left-[-12.2rem] p-3 z-10">
-      <h1 className=" text-base font-medium text-center">
-        Move To Another Bord List
+    <div className="  w-[18.7rem] h-auto bg-gray-100 shadow rounded mt-2 p-3 z-10">
+      <h1 className=" text-lg  text-center">
+        <span className="font-medium">{task.taskTitle}</span> Move To Another
+        Bord List
       </h1>
 
       <div className="w-full mt-1">
