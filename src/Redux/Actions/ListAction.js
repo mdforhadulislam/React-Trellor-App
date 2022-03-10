@@ -48,3 +48,16 @@ export function copy_list_task(payload) {
     payload,
   };
 }
+export function remove_task_id_from_list(payload) {
+  return {
+    type: "REMOVE_TASK_ID_FROM_LIST",
+    payload,
+  };
+}
+
+export function sort_task_in_list(payload) {
+  return {
+    type: "SORT_TASK_ID_IN_LIST",
+    payload,
+  };
+}

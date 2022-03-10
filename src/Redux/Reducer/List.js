@@ -16,8 +16,8 @@ const list = (state = initialState, { type, payload }) => {
       return [...state.filter((lists) => lists.id !== payload.id)];
     }
     case "ADD_LiST_TASK_ID": {
-      const findItem = state.find((list) => list.id === payload.listId);
-      findItem.task = [...findItem.task, payload.taskId];
+      const findItem = state.find((list) => list.id === Number(payload.listId));
+      findItem.task = [...findItem.task, Number(payload.taskId)];
       return [...state];
     }
     case "DELETE_LiST_TASK_ID": {
@@ -50,7 +50,26 @@ const list = (state = initialState, { type, payload }) => {
         listTitle: findItem.listTitle,
         task: findItem.task,
       };
-      return [...state, newList];
+      state.push(newList);
+      return [...state];
+    }
+    case "REMOVE_TASK_ID_FROM_LIST": {
+      const list = state.find((item) => item.id === Number(payload.id));
+      list.task = list.task.filter((item) => item !== Number(payload.taskId));
+
+      return [...state];
+    }
+
+    case "SORT_TASK_ID_IN_LIST": {
+      const { targetIndex, sourceIndex, droppableId } = payload;
+
+      const targetList = state.find(
+        (taskList) => taskList.id === Number(droppableId)
+      );
+      const tasks = targetList.task.splice(Number(sourceIndex), 1);
+      targetList.task.splice(Number(targetIndex), 0, ...tasks);
+
+      return [...state];
     }
 
     default:

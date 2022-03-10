@@ -1,8 +1,14 @@
 import React from "react";
+import { DragDropContext } from "react-beautiful-dnd";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import BackIcon from "../icon/backIcon.svg";
+import {
+  add_list_task_id_action,
+  remove_task_id_from_list,
+  sort_task_in_list,
+} from "../Redux/Actions/ListAction";
 import AddList from "./AddList";
 import ListItem from "./ListItem";
 
@@ -11,6 +17,33 @@ function List() {
   const allBords = useSelector((state) => state.bord);
   const allList = useSelector((state) => state.list);
   const dispatch = useDispatch();
+
+  const onDragEndHendler = (result) => {
+    const { destination, source, draggableId } = result;
+    if (!destination) return;
+    if (destination.droppableId !== source.droppableId) {
+      dispatch(
+        add_list_task_id_action({
+          listId: destination.droppableId,
+          taskId: draggableId,
+        })
+      );
+      dispatch(
+        remove_task_id_from_list({
+          id: source.droppableId,
+          taskId: draggableId,
+        })
+      );
+    } else if (destination.droppableId === source.droppableId) {
+      dispatch(
+        sort_task_in_list({
+          targetIndex: destination.index,
+          sourceIndex: source.index,
+          droppableId: source.droppableId,
+        })
+      );
+    }
+  };
 
   return (
     <>
@@ -50,23 +83,23 @@ function List() {
                 </h1>
               </div>
             </div>
-            <div
-              className={[bord.bgColor, "w-full h-[89vh] p-5"].join(" ")}
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "flex-start",
-                alignItems: "flex-start",
-              }}
-            >
-              {bord?.list?.length <= 0
-                ? ""
-                : bord?.list
-                    ?.map((list) => {
-                      return allList.find((item) => item.id === list);
-                    })
-                    ?.map((singlelist, index) => {
-                      return (
+            <DragDropContext onDragEnd={onDragEndHendler}>
+              <div
+                className={[bord.bgColor, "w-full h-[89vh] p-5"].join(" ")}
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "flex-start",
+                  alignItems: "flex-start",
+                }}
+              >
+                {bord?.list?.length <= 0
+                  ? ""
+                  : bord?.list
+                      ?.map((list) => {
+                        return allList.find((item) => item.id === list);
+                      })
+                      ?.map((singlelist, index) => (
                         <ListItem
                           key={singlelist.id}
                           id={singlelist.id}
@@ -75,12 +108,12 @@ function List() {
                           bordId={bord.id}
                           index={index}
                         />
-                      );
-                    })}
-              <div className="w-[21rem] h-auto p-2 bg-white rounded shadow-md inline-block m-3">
-                <AddList bord={bord} />
+                      ))}
+                <div className="w-[21rem] h-auto p-2 bg-white rounded shadow-md inline-block m-3">
+                  <AddList bord={bord} />
+                </div>
               </div>
-            </div>
+            </DragDropContext>
           </div>
         ))}
     </>

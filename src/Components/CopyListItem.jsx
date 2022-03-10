@@ -5,7 +5,6 @@ import { copy_list_action } from "../Redux/Actions/ListAction";
 
 function CopyListItem({ setIsCopy, id, allBord }) {
   const [selectedCopyBordId, setSelectedCopyBordId] = useState("");
-
   const dispatch = useDispatch();
 
   const copyHendeler = () => {
