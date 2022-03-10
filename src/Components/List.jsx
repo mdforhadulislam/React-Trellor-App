@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
@@ -17,6 +17,11 @@ function List() {
   const allBords = useSelector((state) => state.bord);
   const allList = useSelector((state) => state.list);
   const dispatch = useDispatch();
+
+  const alldata = useSelector((state) => state);
+  useEffect(() => {
+    localStorage.setItem("manageState", JSON.stringify(alldata));
+  }, [alldata]);
 
   const onDragEndHendler = (result) => {
     const { destination, source, draggableId } = result;
