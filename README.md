@@ -4,4 +4,17 @@ live link (https://react-trellor-app.netlify.app/)
 
 <br/>
 
-This application acts as a project management app, like the trellor application. First, you need to add your board, then you choose your board name and a color for your board's background. You can add multiple types of boards. If you want, you can change the name of the board and delete the board. After that, if you click on any board, another page will open and you can add more than one list to it. Again, if you want, you can add tasks inside each list and you can also delete tasks. If you want you can delete the list on a board and then change the name of the list. You can take a list to another board and copy and paste a list to another board if you want.
+● This application is like Trello.<br/>
+● Boards can be made like a Trello. If the name of the board is wrong it can
+be changed and then it can be removed if the board needs to be
+removed.<br/>
+● The list can be added to the board. If the title is incorrect when added to
+the list, it can be changed. Adding a list to the wrong board can add a list
+from one board to another. You can copy the board list more than once if
+you wish. If you wish, you can delete the list.<br/>
+● You can add tasks to the list if you want. Again, if you want, you can
+change the task, and if you want, you can drag it from one list to another.
+If you wish, the same work can be copied to another list. Finally, you can
+delete it.<br/>
+● Technology used: React.js,React-Redux,React Router v6,React
+Beautiful dnd,Html5,Css3,Tailwindcss
